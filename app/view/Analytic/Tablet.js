@@ -13,9 +13,9 @@ Ext.define('TTApp.view.Analytic.Tablet', {
         items: [{
             xtype: 'analyticscore'
         }, {
-            xtype: 'analyticfull'
+            xtype: 'analyticscore',//'analyticfull'
         }, {
-            xtype: 'analyticrally'
+            xtype: 'analyticscore',//'analyticrally'
         }]
     }
 });

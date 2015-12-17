@@ -2,10 +2,15 @@ Ext.define('TTApp.model.Rally', {
     extend: 'Ext.data.Model',
 
     config: {
-        // proxy: {
-        //     type: 'localstorage',
-        //     id  : 'TT-Rally'
-        // },
+        identifier: 'uuid',
+        
+        proxy: {
+            type: 'rest',
+            url : 'rally/',
+            reader:{
+                type: 'json'
+            }
+        },
 
         belongsTo: {
             model: 'TTApp.model.Match',

@@ -41,6 +41,7 @@ Ext.application({
     ],
 
     controllers: [
+        'Analytict',
         'Rallys',
         'Matchs',         //Tasks
         'MatchMenuBottom',

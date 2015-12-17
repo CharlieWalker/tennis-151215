@@ -13,6 +13,13 @@ Ext.define('TTApp.store.Matchs', {
         model: 'TTApp.model.Match',
         storeId: 'Matchs',
 
+        sorters: [
+            {
+                property : 'ts',
+                direction: 'DESC'
+            }
+        ]
+
         // proxy: {
         //     type: 'rest',
         //     url : 'ci/match/',

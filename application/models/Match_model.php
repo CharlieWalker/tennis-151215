@@ -41,7 +41,8 @@ class Match_model extends CI_Model {
 
         public function get_last_ten()
         {
-                $query = $this->db->get($this->table, 10);
+                //$query = $this->db->get($this->table, 10);
+                $query = $this->db->get($this->table);
                 return $query->result();
         }
 

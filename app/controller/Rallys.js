@@ -8,7 +8,7 @@ Ext.define('TTApp.controller.Rallys', {
             editPanel: 'matchformpanel', //编辑画面
             rallyList: 'rallylist',
             rallyActMenu: 'rallyactmenu',
-            matchActMenu :'matchactmenu',
+            matchActMenu: 'matchactmenu',
         },
 
         control: {
@@ -20,7 +20,7 @@ Ext.define('TTApp.controller.Rallys', {
                 tap: 'remove',
             },
 
-            "rallyactmenu #M12_editRallyButton":{
+            "rallyactmenu #M12_editRallyButton": {
                 tap: 'edit',
             },
 
@@ -41,13 +41,20 @@ Ext.define('TTApp.controller.Rallys', {
         }
     },
 
-    analytic:function(){
+    analytic: function() {
+        var record = this.getMatchList().getSelection()[0];
         navigation = this.getMainView();
         navigation.push({
             xtype: 'analytictablet',
             title: 'analytic',
+            store: Ext.create('TTApp.store.Rallys', {
+                filters: [{
+                    property: "match_id",
+                    value: record.get('id')
+                }]
+            }),
         });
-        this.getMatchActMenu().hide();
+        //this.getMatchActMenu().hide();
     },
 
     showBottom: function(dataView, index, target, record, e, eOpts) {
@@ -65,7 +72,7 @@ Ext.define('TTApp.controller.Rallys', {
 
         var store = this.getRallyList().getStore();
         var config = {
-            'match_id': 11111,
+            'match_id': this.getRallyList().get('matchRecord').get('id'),
             'round': 1,
             'turn': 1,
             'isSingle': true,
@@ -109,7 +116,7 @@ Ext.define('TTApp.controller.Rallys', {
         }
 
         var record = this.getRallyList().getSelection()[0];
-        if( !record ){
+        if (!record) {
             return;
         }
 
@@ -119,7 +126,7 @@ Ext.define('TTApp.controller.Rallys', {
             title: 'ラリー追加',
             precord: precord,
             rallyLast: record,
-            edit:'edit'
+            edit: 'edit'
         });
         this.getRallyActMenu().hide();
     },
@@ -133,7 +140,7 @@ Ext.define('TTApp.controller.Rallys', {
         }
 
         var record = this.getRallyList().getSelection()[0].data;
-        if( !record ){
+        if (!record) {
             return;
         }
         // if (record.matchEnd) {
@@ -148,7 +155,7 @@ Ext.define('TTApp.controller.Rallys', {
             title: 'ラリー追加',
             precord: precord,
             rallyLast: record,
-            edit:'add'
+            edit: 'add'
         });
         this.getRallyActMenu().hide();
     },

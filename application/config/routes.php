@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['main'] = 'main/index';
 $route['match/(:any)'] = 'match/index/$1';
+$route['rally/(:any)'] = 'rally/index/$1';

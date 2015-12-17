@@ -7,6 +7,7 @@ Ext.define('TTApp.controller.RallyEdit', {
             //view
             mainView: 'mainview',
             rallySingle: 'rallypanel_s',
+            rallyList: 'rallylist',
 
             //button
             flickButton: 'rallypanel_s button[side]',
@@ -528,8 +529,9 @@ Ext.define('TTApp.controller.RallyEdit', {
         this._D_updateWinner();
 
         //初始化发球者
+        var _re = config.receiverPlayer;
         this.getServerSelect().setValue(config.serverPlayer);
-        this.getReceiverSelect().setValue(config.receiverPlayer);
+        this.getReceiverSelect().setValue(_re);
     },
 
     initNewData: function() {
@@ -537,7 +539,7 @@ Ext.define('TTApp.controller.RallyEdit', {
             record = this.getRallySingle().rallyLast,
             me = this;
         var config = {
-            'match_id': 11111,
+            'match_id': this.getRallyList().get('matchRecord').get('id'),
             'round': 1,
             'turn': 1,
             'isSingle': precord.get('isSingle'),
@@ -623,8 +625,9 @@ Ext.define('TTApp.controller.RallyEdit', {
         this._D_updateWinner();
 
         //初始化发球者
+        var rece = config.receiverPlayer;
         this.getServerSelect().setValue(config.serverPlayer);
-        this.getReceiverSelect().setValue(config.receiverPlayer);
+        this.getReceiverSelect().setValue(rece);
     },
 
     calcServer: function(n, o, isSingle) {

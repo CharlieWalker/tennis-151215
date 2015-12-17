@@ -7,13 +7,13 @@ Ext.define('TTApp.controller.MatchMenuBottom', {
 
     config: {
         refs: {
-            mainView: 'mainview',   //主画面
+            mainView: 'mainview', //主画面
             homeButton: 'mainview #homeButton',
             addMatchButton: 'mainview #addMatchButton',
 
             matchList: 'matchlist', //主列表
-            editPanel: 'matchformpanel',   //编辑画面
-            matchActMenu :'matchactmenu',
+            editPanel: 'matchformpanel', //编辑画面
+            matchActMenu: 'matchactmenu',
             editMatchButton: 'matchactmenu #editMatchButton',
             matchFormField: 'matchformpanel #matchFormField',
             matchFormPlayer11: 'matchformpanel #matchFormPlayer11',
@@ -31,10 +31,8 @@ Ext.define('TTApp.controller.MatchMenuBottom', {
             "matchactmenu #M11_rallyButton": {
                 tap: 'rally'
             },
-            "matchactmenu #M11_analyticButton": {
-                tap: 'analytic'
-            },
-            'matchactmenu #M11_removeMatchButton':{
+            
+            'matchactmenu #M11_removeMatchButton': {
                 tap: 'removeMatch'
             }
         }
@@ -49,7 +47,7 @@ Ext.define('TTApp.controller.MatchMenuBottom', {
             if (response == 'yes') {
                 var matchs = Ext.getStore('Matchs');
                 var record = me.getMatchList().getSelection()[0];
-                if( record ){
+                if (record) {
                     matchs.remove(record);
                     // var mainView = me.getMainView();
                     // mainView.refresh();
@@ -60,20 +58,20 @@ Ext.define('TTApp.controller.MatchMenuBottom', {
         this.getMatchActMenu().hide();
     },
 
-    editMatch: function(){
+    editMatch: function() {
         var menu = this.getMatchActMenu(),
             navigation = this.getMainView();
 
         var arr = navigation.innerItems,
-            _o = arr[arr.length-1];
-        if( Ext.ComponentQuery.is(_o,'matchformpanel') ){
+            _o = arr[arr.length - 1];
+        if (Ext.ComponentQuery.is(_o, 'matchformpanel')) {
             return;
         }
 
         menu.hide();
         var record = this.getMatchList().getSelection()[0];
 
-        if( record ){
+        if (record) {
             //Ext.ComponentQuery.query('matchformpanel')[0].setValues({gname:123})
             // Navigate to form
 
@@ -96,23 +94,25 @@ Ext.define('TTApp.controller.MatchMenuBottom', {
             navigation = this.getMainView();
 
         var arr = navigation.innerItems,
-            _o = arr[arr.length-1];
-        if( Ext.ComponentQuery.is(_o,'rallylist') ){
+            _o = arr[arr.length - 1];
+        if (Ext.ComponentQuery.is(_o, 'rallylist')) {
             return;
         }
-        
+
         var record = this.getMatchList().getSelection()[0];
-        if( record ){
+        if (record) {
             // Navigate to form
             var rallylist = navigation.push({
                 xtype: 'rallylist',
                 title: 'ラリー一覧',
                 matchRecord: record,
+                store: Ext.create('TTApp.store.Rallys', {
+                    filters: [{
+                        property: "match_id",
+                        value: record.get('id')
+                    }]
+                })
             });
-
-            //rallylist.setRecord(record);
-            this.getHomeButton().hide();
-            this.getAddMatchButton().hide();
         }
     },
 

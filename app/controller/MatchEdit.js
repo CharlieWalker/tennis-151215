@@ -14,6 +14,8 @@ Ext.define('TTApp.controller.MatchEdit', {
 
             playerList: 'playerlist',
             geventSelect: 'matchformpanel #geventSelect',
+
+            singleField: 'matchformpanel hiddenfield[name=isSingle]'
         },
 
         control: {
@@ -49,11 +51,13 @@ Ext.define('TTApp.controller.MatchEdit', {
             panel.down('#matchFormPlayer11').setTitle('ペアA選手1');
             panel.down('#matchFormPlayer22').show();
             panel.down('#matchFormPlayer21').setTitle('ペアB選手1');
+            this.getSingleField().setValue(false);
         }else{
             panel.down('#matchFormPlayer12').hide();
             panel.down('#matchFormPlayer11').set('title','選手A');
             panel.down('#matchFormPlayer22').hide();
             panel.down('#matchFormPlayer21').set('title','選手B');
+            this.getSingleField().setValue(true);
         }
     },
 

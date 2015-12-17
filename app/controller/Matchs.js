@@ -12,10 +12,14 @@ Ext.define('TTApp.controller.Matchs', {
             editPanel: 'matchformpanel',   //编辑画面
             matchActMenu :'matchactmenu',
 
+            //button
             homeButton: 'mainview #homeButton',
             addMatchButton: 'mainview #addMatchButton',
-
             editMatchButton: 'matchactmenu #editMatchButton',
+            analyticRallyButton: 'mainview #analyticRallyButton',
+            addRallyButton: 'mainview #addRallyButton',
+            rallyActMenu: 'rallyactmenu',
+
 
             matchFormField: 'matchformpanel #matchFormField',
             matchFormPlayer11: 'matchformpanel #matchFormPlayer11',
@@ -23,10 +27,17 @@ Ext.define('TTApp.controller.Matchs', {
             matchFormPlayer21: 'matchformpanel #matchFormPlayer21',
             matchFormPlayer22: 'matchformpanel #matchFormPlayer22',
 
+
             deleteButton: 'matchformpanel #deleteButton'
         },
 
         control: {
+            "mainview": {
+                pop: "onPop",
+                push: "onPush",
+            },
+            
+
             "matchlist": {
                 itemtap: 'showBottom',
             },
@@ -42,6 +53,70 @@ Ext.define('TTApp.controller.Matchs', {
                 tap: 'addMatch'
             },
         }
+    },
+
+    //v.innerItems[v.innerItems.length-2].xtype
+    //out
+    onPop: function( main, view, eOpts ){
+        var b = view.xtype,
+            a = main.innerItems[main.innerItems.length-1].xtype;
+        this._show(a);
+        this._hide(b);
+    },
+
+    _show: function(xtype){
+        switch( xtype ){
+            case "matchlist":
+                this.getHomeButton().show();
+                this.getAddMatchButton().show();
+                break;
+
+            case "matchformpanel":
+                break;
+
+            case "rallylist":
+                this.getAnalyticRallyButton().show();
+                this.getAddRallyButton().show();
+                break;
+
+            case "rallypanel_s":
+                break;
+
+            case "analytictablet":
+                break;
+        }
+    },
+
+    _hide: function(xtype){
+        switch(xtype){
+            case "matchlist":
+                this.getHomeButton().hide();
+                this.getAddMatchButton().hide();
+                this.getMatchActMenu().hide();
+                break;
+
+            case "matchformpanel":
+                break;
+
+            case "rallylist":
+                this.getAnalyticRallyButton().hide();
+                this.getAddRallyButton().hide();
+                this.getRallyActMenu().hide()
+                break;
+
+            case "rallypanel_s":
+                break;
+
+            case "analytictablet":
+                break;
+        }
+    },
+
+    onPush: function( main, view, eOpts ){
+        var b = view.xtype,
+            a = main.innerItems[main.innerItems.length-2].xtype;
+        this._show(b);
+        this._hide(a);
     },
 
     showBottom: function(dataView, index, target, record, e, eOpts){

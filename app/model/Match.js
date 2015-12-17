@@ -27,7 +27,7 @@ var _field = [
     {
         name: 'isSingle',      //是否是开局第一球
         type: 'boolean',
-        defaultValue: true
+        //defaultValue: true
     },
     {
         name: 'player11last',   //name: '選手11',
@@ -145,7 +145,8 @@ Ext.define('TTApp.model.Match', {
         },
         hasMany: {
             model: 'TTApp.model.Rally',
-            name: 'rallys'
+            name: 'rallys',
+            filterProperty: 'match_id'
         },
         fields: _field,
         validations:[

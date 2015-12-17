@@ -7,8 +7,6 @@ Ext.define('TTApp.store.Rallys', {
     ],
 
     config: {
-        sorters: 'round',
-
         grouper: {
             groupFn: function(record) {
                 return record.get('round')+'ゲーム目: '+record.get('ARound')+'-'+record.get('BRound');
@@ -16,13 +14,7 @@ Ext.define('TTApp.store.Rallys', {
         },
 
         autoLoad: true,
-        proxy: {
-            type: 'ajax',
-            url : 'rallys.json',
-            reader:{
-                type: 'json'
-            }
-        },
+        autoSync: true,
         model: 'TTApp.model.Rally',
         storeId: 'Rallys',
         sorters: [
